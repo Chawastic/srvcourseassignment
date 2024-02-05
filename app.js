@@ -25,13 +25,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const config = {
   authRequired: false,
-  auth0Logout: true
+  auth0Logout: true,
+  secret: process.env.SECRET,
+  baseURL: process.env.BASE_URL,
+  clientID: process.env.CLIENT_ID,
+  issuerBaseURL: process.env.ISSUER_BASE_URL
 };
-
-const port = process.env.PORT || 3000;
-if (!config.baseURL && !process.env.BASE_URL && process.env.PORT && process.env.NODE_ENV !== 'production') {
-  config.baseURL = `http://localhost:${port}`;
-}
 
 app.use(auth(config));
 
